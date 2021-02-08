@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="./vue.js"></script>
+
+    <title>LifeCicles</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>GitHub</h3>
+
+      <div>{{github}}</div>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          github: {},
+        },
+        methods: {
+          async pullDataGit() {
+            const dataGit = await fetch(
+              "https://api.github.com/users/matheusbribeiro-dev"
+            );
+            const dataGitJson = await dataGit.json();
+
+            this.github = dataGitJson;
+          },
+        },
+        created() {
+          this.pullDataGit();
+        }
+      });
+    </script>
+  </body>
+</html>
