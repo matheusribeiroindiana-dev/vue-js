@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--vue-->
+    <script src="./vue.js"></script>
+
+    <title>Computed and watch</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>Teste com Computed</h3>
+      {{total}}
+      <h3>Com array e objetos</h3>
+      <ul>
+        <li v-for="carro in carrosAzuis">{{carro.marca}}</li>
+      </ul>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          price: 59,
+          discount: 10,
+          carros: [
+            {
+              marca: "VW",
+              cor: "Azul",
+            },
+            {
+              marca: "Ford",
+              cor: "Preto",
+            },
+            {
+              marca: "Tesla",
+              cor: "Azul",
+            },
+          ],
+        },
+        computed: {
+          total() {
+            return `R$ ${this.price - this.discount}`;
+          },
+          carrosAzuis() {
+            return this.carros.filter((e) => e.cor === "Azul");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

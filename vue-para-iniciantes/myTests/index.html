@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--vue-->
+    <script src="./vue.js"></script>
+
+    <title>Teste Wick</title>
+  </head>
+  <body>
+    <h1>O que quer entender ?</h1>
+    <div id="app">
+      <template>
+        <input type="text" placeholder="Digite aqui..." name="input" />
+        <button @click="searchInWick">Search</button>
+      </template>
+
+      <template v-if="response">
+        <h1>Aqui está sua resposta &hearts; :</h1>
+      </template>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          dataResponse: {},
+          response: false,
+        },
+        methods: {
+          searchInWick() {
+            fetch("https://pt.wikipedia.org/wiki/Brasil")
+              .then((response) => response.text())
+              .then((text) => console.log(text));
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

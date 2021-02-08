@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      .verde {
+        color: green;
+      }
+
+      .vermelho {
+        color: red;
+      }
+    </style>
+
+    <!--vue-->
+    <script src="./vue.js"></script>
+
+    <title>Vue v-on</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Ativo ?</h1>
+      <button @click="activeOrNot">{{labelButton}}</button>
+      <p :class="ativo ? 'verde': 'vermelho'">Ativo ou Desativo ?</p>
+      <p v-if="ativo">Mostrando texto</p>
+
+      <h1>Contadorzinho</h1>
+      <button @click="handleClick">Add</button>
+      {{contador}}
+
+      <h1>Alguns parametros para o @click</h1>
+      <a href="#interno" @click.prevent="handleClick"> Link interno </a
+      ><!-- .prevent = .preventDefalut
+               .once = acontece apenas uma vez  -->
+
+      <h1>Outros eventos</h1>
+      <input type="text" @keyup.f="handleClick" />
+      <!--so irá ativar a função quando a entrada for 'f'.
+        pode ser feito tb por exemplo com .enter-->
+
+      <p @mousemove="handleMove">Esse é o mouse x: {{mouse.x}}</p>
+    </div>
+
+    <script>
+      //testes
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          contador: 0,
+          ativo: true,
+          labelButton: "button",
+          mouse: "",
+        },
+        methods: {
+          activeOrNot() {
+            this.ativo = !this.ativo;
+
+            this.ativo
+              ? (this.labelButton = "desativar")
+              : (this.labelButton = "ativar");
+          },
+          handleClick(event) {
+            console.log(event.key);
+            //this.contador++;
+          },
+          handleMove(event) {
+            this.mouse = event;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

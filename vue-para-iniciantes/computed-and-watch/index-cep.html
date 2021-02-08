@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+
+      label {
+        display: block;
+        margin: 0 0 10px 0;
+      }
+
+      input {
+        padding: 5px 0 5px 7px;
+        border: none;
+        background-color: rgba(38, 0, 255, 0.267);
+        border-radius: 2px;
+      }
+
+      .showInfos {
+        margin: 10px 0;
+      }
+
+      .showInfos {
+        width: 400px;
+        background-color: #d6ffec;
+        border-radius: 10px;
+        padding: 10px;
+      }
+    </style>
+
+    <!--vue-->
+    <script src="./vue.js"></script>
+
+    <title>Computed and watch</title>
+  </head>
+  <body>
+    <div id="app">
+      <label for="cep">Cep:</label>
+      <input id="cep" type="text" maxlength="8" v-model="cep" />
+
+      <div class="showInfos" v-if="returnData">
+        <p><strong>Bairro: </strong> {{address.bairro}}</p>
+        <p><strong>Logradouro: </strong> {{address.logradouro}}</p>
+        <p><strong>Localidade: </strong> {{address.localidade}}</p>
+        <p><strong>UF: </strong> {{address.uf}}</p>
+      </div>
+    </div>
+
+    <script>
+      //https://viacep.com.br/ws/01001000/json/
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          returnData: false,
+          cep: "",
+          address: {},
+        },
+        watch: {
+          cep(valor) {
+            if (valor.length === 8) {
+              fetch(`https://viacep.com.br/ws/${valor}/json/`)
+                .then((response) => response.json())
+                .then((json) => {
+                  this.address = json;
+                  this.returnData = true;
+                });
+            } else {
+              this.returnData = false;
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

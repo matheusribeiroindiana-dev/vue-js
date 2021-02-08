@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Vue-->
+    <script src="./vue.js"></script>
+
+    <title>Vue v-if</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>Carrinho de compras</p>
+      <p>Itens: {{itens}}</p>
+      <template v-if="itens < 7">
+        Adicionar <button @click="handleClick">Add</button>
+      </template>
+      <template v-else>
+        <p>Não é possível adicionar mais itens</p>
+      </template>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          itens: 0,
+        },
+        methods: {
+          handleClick() {
+            this.itens++;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

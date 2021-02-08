@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--vue-->
+    <script src="./vue.js"></script>
+
+    <title>Aula - exercícios</title>
+  </head>
+  <body>
+    <div id="app">
+      {{acoes.latestPrice}} - {{acoes.latestTime}} - {{acoes.companyName}}
+
+      <button @click="puxarAcoes">Puxar Ações</button>
+    </div>
+
+    <script>
+      //https://cloud.iexapis.com/stable/stock/aapl/quote?token=pk_5e6c74d8c68e42148860a71016ceaacb
+
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          acoes: {},
+        },
+        methods: {
+          puxarAcoes() {
+            fetch(
+              "https://cloud.iexapis.com/stable/stock/nvda/quote?token=pk_5e6c74d8c68e42148860a71016ceaacb"
+            )
+              .then((response) => response.json())
+              .then((json) => {
+                this.acoes = json;
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--vue-->
+    <script src="./vue.js"></script>
+
+    <title>Computed and watch</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Nome</h1>
+      <p>{{completeName}}</p>
+
+      <h1>Capitais dos países</h1>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          nome: "Matheus",
+          sobrenome: "Ribeiro",
+        },
+        computed: {
+          completeName() {
+            return `${this.nome} ${this.sobrenome}`;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+
+      .show {
+        width: 400px;
+        padding: 10px;
+        color: rgb(0, 255, 0);
+        background-color: rgba(0, 0, 0, 0.8);
+        border-radius: 3px;
+      }
+    </style>
+
+    <!--vue-->
+    <script src="./vue.js"></script>
+
+    <title>Vue v-on - exercicios</title>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li>
+          <a
+            @click.prevent="handleClickInLink"
+            href="https://cloud.iexapis.com/stable/stock/aapl/quote?token=pk_5e6c74d8c68e42148860a71016ceaacb"
+            >Apple</a
+          >
+        </li>
+        <li>
+          <a
+            @click.prevent="handleClickInLink"
+            href="https://cloud.iexapis.com/stable/stock/googl/quote?token=pk_5e6c74d8c68e42148860a71016ceaacb"
+            >Google</a
+          >
+        </li>
+        <li>
+          <a
+            @click.prevent="handleClickInLink"
+            href="https://cloud.iexapis.com/stable/stock/amzn/quote?token=pk_5e6c74d8c68e42148860a71016ceaacb"
+            >Amazon</a
+          >
+        </li>
+        <li>
+          <a
+            @click.prevent="handleClickInLink"
+            href="https://cloud.iexapis.com/stable/stock/ebay/quote?token=pk_5e6c74d8c68e42148860a71016ceaacb"
+            >Ebay</a
+          >
+        </li>
+        <li>
+          <a
+            @click.prevent="handleClickInLink"
+            href="https://cloud.iexapis.com/stable/stock/stock/quote?token=pk_5e6c74d8c68e42148860a71016ceaacb"
+            >Paypal</a
+          >
+        </li>
+      </ul>
+
+      <div class="show" v-if="show">
+        <h3>Empresa: {{dataApi.companyName}}</h3>
+        <h3>Valor da ação: {{dataApi.latestPrice}}</h3>
+        <h3>Valor de Mercado: {{dataApi.marketCap}}</h3>
+      </div>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          dataApi: {},
+          show: false,
+        },
+        methods: {
+          handleClickInLink(event) {
+            fetch(event.target.href)
+              .then((response) => response.json())
+              .then((json) => {
+                this.dataApi = json;
+                this.show = true;
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

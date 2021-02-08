@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      button {
+        display: block;
+      }
+      .card {
+        display: inline-block;
+        margin-top: 10px;
+        padding-left: 5px;
+        width: 400px;
+        border: 2px solid rgb(56, 55, 55);
+        border-radius: 3px;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+
+    <!--vue-->
+    <script src="./vue.js"></script>
+
+    <title>v-for exercício</title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="puxarAula">Puxar</button>
+
+      <div class="card" v-for="course in courses">
+        <h3><a :href="course.link">{{course.curso}}</a></h3>
+        <h5>Aulas</h5>
+        <ul>
+          <li v-for="aula in course.aulas">{{aula.nome}}, {{aula.tempo}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          courses: {},
+        },
+        methods: {
+          puxarAula() {
+            fetch("./cursos.json")
+              .then((response) => response.json())
+              .then((json) => (this.courses = json));
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

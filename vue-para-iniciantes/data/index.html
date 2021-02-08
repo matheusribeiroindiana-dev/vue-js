@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      div.square {
+        width: 200px;
+        height: 200px;
+        margin: 0 30px;
+        border: 3px solid #ccc;
+      }
+
+      label {
+        display: block;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      label,
+      input {
+        margin: 10px 30px 0;
+      }
+    </style>
+
+    <!-- vue -->
+    <script src="./vue.js"></script>
+
+    <title>Data exercices</title>
+  </head>
+  <body>
+    <!-- acerte o código abaixo - CONSERTADO-->
+    <div id="app">{{empresa}}, {{produto}}</div>
+
+    <div id="app1">
+      <p>Lado: {{side}}</p>
+      <p>Perímetro: {{side * 4}}</p>
+      <p>Área: {{ side * side}}</p>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          empresa: "Apple",
+          produto: "iPhone",
+        },
+      });
+    </script>
+    <!-- Crie uma instancia que mostre
+      baseado no valor do lado do quadrado
+      o seu perímetro e área. O lado do quadrado deve ser reativo
+    -->
+    <script>
+      const vm1 = new Vue({
+        el: "#app1",
+        data: {
+          side: 30,
+        },
+      });
+    </script>
+  </body>
+</html>

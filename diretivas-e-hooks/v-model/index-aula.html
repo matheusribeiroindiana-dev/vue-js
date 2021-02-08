@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="./vue.js"></script>
+
+    <title>v-model</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="name" />
+      <hr />
+      <textarea
+        name="textarea"
+        id="textarea"
+        cols="20"
+        rows="5"
+        v-model="message"
+      ></textarea>
+      {{name}}
+      <hr />
+      {{message}}
+
+      <h1>Outros testes</h1>
+      <input type="checkbox" v-model="receberEmail" />
+      Receber Email: {{receberEmail}}
+
+      <div>
+        <select v-model="fruta">
+          <option disabled value="">Selecione</option>
+          <option value="banana">Banana</option>
+          <option value="morango">Morango</option>
+          <option value="uva">Uva</option>
+        </select>
+        {{fruta}}
+      </div>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          name: "",
+          message: "",
+          receberEmail: false,
+          fruta: "",
+        },
+      });
+    </script>
+  </body>
+</html>

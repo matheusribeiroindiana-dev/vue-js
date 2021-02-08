@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--vue-->
+    <script src="./vue.js"></script>
+
+    <title>Computed and watch</title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="puxarPaises">Puxar</button>
+
+      <select name="paises" id="paises" v-model="selecionado">
+        <option v-for="pais in paises" :value="pais.name">{{pais.name}}</option>
+      </select>
+
+      <p v-if="singlePais">Capital: {{singlePais.capital}}</p>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          paises: {},
+          selecionado: "",
+          singlePais: "",
+        },
+        methods: {
+          puxarPaises() {
+            fetch("https://restcountries.eu/rest/v2/all")
+              .then((response) => response.json())
+              .then((json) => {
+                this.paises = json;
+              });
+          },
+        },
+        watch: {
+          selecionado(valor) {
+            this.singlePais = this.paises.find((pais) => pais.name === valor);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

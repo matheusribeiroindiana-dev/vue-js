@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="./vue.js"></script>
+
+    <title>v-on key</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <input @keyup="active" type="text" />Assim que se solta a tecla -->
+      <!-- <input @keydown="active" type="text" />Assim que a tecla é precissionada -->
+      <!-- Modificadores -->
+      <!-- <input @keyup.enter="active" type="text" />Só acontece o evento ao
+      soltar a tecla enter-->
+      <!--clcik-->
+      <!-- <input @click="active" type="text" /padrão -->
+      <!-- <input @click.alt="active" type="text" />Segurando tecla alt -->
+      <!-- <input @click.right="active" type="text" />Botão direito -->
+      <!-- <input @click.middle="active" type="text" />Botao do meio -->
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+          active() {
+            console.log("foi");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

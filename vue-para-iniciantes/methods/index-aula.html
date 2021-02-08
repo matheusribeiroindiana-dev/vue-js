@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--vue-->
+    <script src="./vue.js"></script>
+
+    <title>Methods</title>
+  </head>
+  <body>
+    <div id="app">
+      {{total}}
+
+      <button @click="add">Add</button>
+      <button @click="reduce">Diminuir</button>
+
+      <h1>Compras</h1>
+      <p>Carrinho: {{buy}} - {{alert}}</p>
+
+      <button @click="buyChange('Guitarra')">Guitarra</button>
+      <button @click="buyChange('Violão')">Violão</button>
+
+      <button @click="seeTheEvent">EventClick</button>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          total: 0,
+          buy: "",
+          alert: "",
+        },
+        methods: {
+          add() {
+            this.total++;
+          },
+          reduce() {
+            this.total ? this.total-- : 0;
+          },
+          buyChange(instrument) {
+            this.buy = instrument;
+            this.alertChange();
+          },
+          alertChange() {
+            this.alert = "Mudou de nome !";
+          },
+          seeTheEvent(event) {
+            console.log(event);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

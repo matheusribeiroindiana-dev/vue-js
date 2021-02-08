@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="./vue.js"></script>
+    <title>Template e diretivas</title>
+  </head>
+  <body>
+    <!--
+      Ou v-show que aplica um display: none
+      ao invés de remover o elento como o v-if
+    -->
+    <div id="app">
+      <div v-if="buy" v-bind:style="{background: color}">
+        <h1>{{title}}</h1>
+        <p>{{content}}</p>
+
+        <p>{{side * side}}</p>
+        <p>{{buy ? 'yes': 'no'}}</p>
+
+        <!-- v-model -->
+        <input v-model="color" type="color" />
+        {{ color }}
+      </div>
+
+      <!-- usando v-bind -->
+      <a v-bind:href="buy ? href : ''">Origamid</a>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          title: "Vue course",
+          content: "This is content",
+          side: 5,
+          buy: true,
+          href: "https://www.origamid.com",
+          color: "#333",
+        },
+      });
+    </script>
+  </body>
+</html>

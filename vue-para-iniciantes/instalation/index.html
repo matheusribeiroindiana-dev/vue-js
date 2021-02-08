@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- vue -->
+    <script src="./vue.js"></script>
+
+    <title>Vue.js</title>
+  </head>
+  <body>
+    <div id="app">
+      {{name}}, Idade: {{age}}, Faculdade: {{college.have}}, Curso:
+      {{college.course}}
+    </div>
+
+    <script>
+      //È necessário inicializar o 'options'
+      //Possui propriedades e métodos que são usados pelo vue
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          name: "Matheus",
+          age: 20,
+          college: {
+            have: "sim",
+            course: "Sistemas",
+          },
+        },
+      });
+
+      vm.name = "Teste";
+
+      console.log(vm);
+    </script>
+  </body>
+</html>

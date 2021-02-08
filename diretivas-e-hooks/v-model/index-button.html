@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      input {
+        width: 80px;
+      }
+
+      .settings {
+        margin: 10px 0;
+      }
+
+      div {
+        margin: 10px 0;
+      }
+    </style>
+
+    <script src="./vue.js"></script>
+
+    <title>v-model</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Gere o botão</h1>
+      <button :style="button">Button</button>
+
+      <div class="settings">
+        <div>
+          <label for="w">width: </label>
+          <input id="w" type="text" v-model="button.width" />
+        </div>
+
+        <div>
+          <label for="h">Height: </label>
+          <input id="h" type="text" v-model="button.height" />
+        </div>
+
+        <div>
+          <label for="f">Font-size: </label>
+          <input id="f" type="text" v-model="button.fontSize" />
+        </div>
+
+        <div>
+          <label for="fa">Font-family: </label>
+          <input id="fa" type="text" v-model="button.fontFamily" />
+        </div>
+
+        <div>
+          <label for="t">Text-align: </label>
+          <input id="t" type="text" v-model="button.textAlign" />
+        </div>
+
+        <div>
+          <label for="b">Background: </label>
+          <input id="b" type="color" v-model="button.background" />
+        </div>
+
+        <div>
+          <label for="c">Color: </label>
+          <input id="c" type="color" v-model="button.color" />
+        </div>
+
+        <div>
+          <label for="br">Border-radius: </label>
+          <input id="br" type="text" v-model="button.borderRadius" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          button: {
+            width: "",
+            height: "",
+            fontSize: "",
+            fontFamily: "",
+            textAlign: "",
+            background: "",
+            color: "",
+            borderRadius: "",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
