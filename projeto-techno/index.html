@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Vue-->
+    <script src="./vue.js"></script>
+
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--Css-->
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Techno</title>
+  </head>
+  <body>
+    <!--div-app-->
+    <div id="app">
+      <!--section-->
+      <section class="produtos">
+        <!--div-produto-->
+        <div v-for="product in products" :key="product.id" class="produto">
+          <img :src="product.img" :alt="product.nome" class="produto-img" />
+
+          <div class="produto-info">
+            <span class="produto-preco">{{product.preco}}</span>
+            <h2 class="produto-titulo">{{product.nome}}</h2>
+          </div>
+        </div>
+        <!--/ div-produto-->
+      </section>
+      <!--/ section-->
+    </div>
+    <!--/ div-app-->
+    <script src="./app.js"></script>
+  </body>
+</html>
