@@ -3,6 +3,20 @@ const vm = new Vue({
   data: {
     products: [],
     singleProduct: false,
+    car: [],
+  },
+  computed: {
+    totalCar() {
+      let total = 0;
+
+      if (this.car.length) {
+        this.car.forEach((element) => {
+          total += element.preco;
+        });
+      }
+
+      return total;
+    },
   },
   methods: {
     pullTheProducts() {
@@ -31,9 +45,28 @@ const vm = new Vue({
         this.singleProduct = false;
       }
     },
+    addInCar() {
+      this.singleProduct.estoque--;
+      const { id, nome, preco } = this.singleProduct;
+      this.car.push({ id, nome, preco });
+    },
+    itemRemove(index) {
+      this.car.splice(index, 1);
+    },
+    checkLocalStorage() {
+      if (window.localStorage.car) {
+        this.car = JSON.parse(window.localStorage.car);
+      }
+    },
+  },
+  watch: {
+    car() {
+      window.localStorage.car = JSON.stringify(this.car);
+    },
   },
   created() {
     this.pullTheProducts();
+    this.checkLocalStorage();
   },
   filters: {
     //para tratar os dados de preço
