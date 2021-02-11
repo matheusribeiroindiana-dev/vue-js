@@ -74,7 +74,9 @@
             <button class="modal-fechar" @click="singleProduct = false">
               X
             </button>
-            <span class="modal-preco">{{singleProduct.preco}}</span>
+            <span class="modal-preco">
+              {{singleProduct.preco | priceNumber}}
+            </span>
             <h2 class="modal-titulo">{{singleProduct.nome}}</h2>
             <p>{{singleProduct.descricao}}</p>
 
@@ -108,6 +110,10 @@
         <!--container-->
       </section>
       <!--/ modal single-->
+
+      <div class="alerta" :class="{ativo: activeAlert}">
+        <p class="alerta-mensagem">{{alertMessageString}}</p>
+      </div>
     </div>
     <!--/ div-app-->
     <script src="./app.js"></script>

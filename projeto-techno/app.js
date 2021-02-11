@@ -4,6 +4,8 @@ const vm = new Vue({
     products: [],
     singleProduct: false,
     car: [],
+    alertMessageString: "",
+    activeAlert: false,
   },
   computed: {
     totalCar() {
@@ -49,6 +51,8 @@ const vm = new Vue({
       this.singleProduct.estoque--;
       const { id, nome, preco } = this.singleProduct;
       this.car.push({ id, nome, preco });
+
+      this.alertMessage(`${nome} foi adicionado ao carrinho.`);
     },
     itemRemove(index) {
       this.car.splice(index, 1);
@@ -58,8 +62,28 @@ const vm = new Vue({
         this.car = JSON.parse(window.localStorage.car);
       }
     },
+    alertMessage(message) {
+      this.alertMessageString = message;
+      this.activeAlert = true;
+
+      setTimeout(() => {
+        this.activeAlert = false;
+      }, 1500);
+    },
+    router() {
+      const hash = document.location.hash;
+      console.log(hash);
+      if (hash) {
+        this.pullSingleProduct(hash.replace("#", ""));
+      }
+    },
   },
   watch: {
+    singleProduct() {
+      document.title = this.singleProduct.nome || "Techno";
+      const hash = this.singleProduct.id || "";
+      history.pushState(null, null, `#${hash}`);
+    },
     car() {
       window.localStorage.car = JSON.stringify(this.car);
     },
@@ -67,6 +91,7 @@ const vm = new Vue({
   created() {
     this.pullTheProducts();
     this.checkLocalStorage();
+    this.router();
   },
   filters: {
     //para tratar os dados de preço
