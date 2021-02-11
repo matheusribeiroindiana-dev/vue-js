@@ -29,16 +29,9 @@
         <img class="logo" src="./assets/techno.svg" alt="techno" />
         <!--/ logo-->
 
-        <div class="carrinho-menu">
+        <div class="carrinho-menu" @click="activeCar = true">
           {{totalCar | priceNumber}} | {{car.length}}
         </div>
-
-        <ul>
-          <li v-for="(item, index) in car">
-            <p>{{item.nome}}</p>
-            <button @click="itemRemove(index)">X</button>
-          </li>
-        </ul>
       </header>
       <!--/ header-->
 
@@ -110,6 +103,33 @@
         <!--container-->
       </section>
       <!--/ modal single-->
+
+      <!--modal carrinho-->
+      <section
+        class="carrinho-modal"
+        :class="{ativo: activeCar}"
+        @click="clickWithout"
+      >
+        <div class="carrinho-container">
+          <button class="carrinho-fechar" @click="activeCar = false">X</button>
+          <h2 class="carrinho-titulo">Carrinho</h2>
+          <div v-if="car.length > 0">
+            <ul class="carrinho-lista">
+              <li v-for="(item, index) in car" class="carrinho-item">
+                <p>{{item.nome}}</p>
+                <p class="carrinho-preco">{{item.preco | priceNumber}}</p>
+                <button class="carrinho-remover" @click="itemRemove(index)">
+                  X
+                </button>
+              </li>
+            </ul>
+            <p class="carrinho-total">Total: {{totalCar | priceNumber}}</p>
+            <button class="carrinho-finalizar">Finalizar compra</button>
+          </div>
+          <p v-else>Carrinho vazio</p>
+        </div>
+      </section>
+      <!--/ modal carrinho-->
 
       <div class="alerta" :class="{ativo: activeAlert}">
         <p class="alerta-mensagem">{{alertMessageString}}</p>

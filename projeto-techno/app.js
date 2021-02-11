@@ -6,6 +6,7 @@ const vm = new Vue({
     car: [],
     alertMessageString: "",
     activeAlert: false,
+    activeCar: false,
   },
   computed: {
     totalCar() {
@@ -47,6 +48,11 @@ const vm = new Vue({
         this.singleProduct = false;
       }
     },
+    clickWithout({ target, currentTarget }) {
+      if (target === currentTarget) {
+        this.activeCar = false;
+      }
+    },
     addInCar() {
       this.singleProduct.estoque--;
       const { id, nome, preco } = this.singleProduct;
@@ -62,6 +68,11 @@ const vm = new Vue({
         this.car = JSON.parse(window.localStorage.car);
       }
     },
+    stockCompare() {
+      const items = this.car.filter((item) => item.id === this.singleProduct.id);
+
+      this.singleProduct.estoque -= items.length;
+    },
     alertMessage(message) {
       this.alertMessageString = message;
       this.activeAlert = true;
@@ -72,7 +83,7 @@ const vm = new Vue({
     },
     router() {
       const hash = document.location.hash;
-      console.log(hash);
+
       if (hash) {
         this.pullSingleProduct(hash.replace("#", ""));
       }
@@ -83,6 +94,10 @@ const vm = new Vue({
       document.title = this.singleProduct.nome || "Techno";
       const hash = this.singleProduct.id || "";
       history.pushState(null, null, `#${hash}`);
+
+      if (this.singleProduct) {
+        this.stockCompare();
+      }
     },
     car() {
       window.localStorage.car = JSON.stringify(this.car);
